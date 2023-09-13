@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PRACTICE_OF_AJAX.Models.EMPLOYEE>
+
+
+<div id="DivUpdate">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CITY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SALARY)
+            </th>
+        </tr>
+
+        @if (Model.Count() <= 0)
+        {
+            <tr>
+                <td colspan="4" class="text-center text-danger">
+                    <p>No employee record found!</p>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CITY)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SALARY)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>

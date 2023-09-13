@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PRACTICE_OF_AJAX.Models.EMPLOYEE>
+
+@{
+    ViewBag.Title = "About";
+}
+
+<h2>LIST OF EMPLOYEE</h2>
+
+@using (Ajax.BeginForm("About", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "DivUpdate",
+    LoadingElementId = "loader",
+    OnComplete = "clear",
+}))
+{
+    <div class="input-group">
+        <input type="search" name="name" id="name" class="form-control rounded" style="margin-right : 10px;" placeholder="Enter employee name" aria-label="Search" aria-describedby="search-addon" />
+        <span>
+            <button type="submit" class="btn btn-outline-primary">search</button>
+            <div class="spinner-border text-center" id="loader" role="status" style="display : none;">
+            </div>
+        </span>
+    </div>
+}
+
+
+
+<div id="DivUpdate">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CITY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SALARY)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CITY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SALARY)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    function clear() {
+        document.getElementById("name").value = "";
+    }
+</script>

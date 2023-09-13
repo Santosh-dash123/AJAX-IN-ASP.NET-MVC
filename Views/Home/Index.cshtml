@@ -1,0 +1,75 @@
+﻿@model PRACTICE_OF_AJAX.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ADD NEW EMPLOYEE</h2>
+
+
+
+@using(Ajax.BeginForm("Index",new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "DivUpdate",
+    OnComplete = "clear",
+    LoadingElementId = "loader",
+    LoadingElementDuration = 10,
+}))
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control",id = "name" } })
+            @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CITY, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CITY, new { htmlAttributes = new { @class = "form-control",id = "city" } })
+            @Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SALARY, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SALARY, new { htmlAttributes = new { @class = "form-control", id = "salary" } })
+            @Html.ValidationMessageFor(model => model.SALARY, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br/>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add" class="btn btn-outline-primary" />
+            <span class="spinner-border spinner-border-sm" id="loader" role="status" style="display : none;" aria-hidden="true"></span>
+        </div>
+    </div>
+</div>
+}
+
+<div id="DivUpdate">
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    function clear() {
+        document.getElementById("name").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("salary").value = "";
+    }
+</script>
